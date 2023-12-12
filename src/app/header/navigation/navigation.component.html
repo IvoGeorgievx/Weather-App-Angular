@@ -1,0 +1,5 @@
+<ul class="nav-link">
+    <a routerLink="/">Home</a>
+    <a routerLink="/favorites">Favorites</a>
+    <mat-slide-toggle (change)="onThemeToggle($event)">{{isDarkTheme ? 'Light Mode': 'Dark Mode'}}</mat-slide-toggle>
+</ul>

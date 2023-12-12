@@ -1,0 +1,16 @@
+/* header.component.scss */
+.mat-toolbar {
+  background-color: #2196f3;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.app-logo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.theme-toggle-button {
+  color: white;
+}

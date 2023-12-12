@@ -1,0 +1,59 @@
+<div class="main-info-wrapper">
+    <div class="search-wrapper">
+        <form #searchForm="ngForm" (ngSubmit)="submitHandler(searchForm)">
+            <mat-form-field class="search-field">
+                <input matInput [(ngModel)]="cityName" name="city" placeholder="Enter city">
+            </mat-form-field>
+            <app-button></app-button>
+
+        </form>
+    </div>
+
+    <div *ngIf="isLoading; else content">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #content>
+        <mat-card class="example-card" *ngIf="currentWeather" [@slideIn]>
+            <mat-card-header>
+                <mat-card-title>{{displayedCityName}}</mat-card-title>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{currentWeather.LocalObservationDateTime | date: 'medium'}}</mat-card-title>
+                <mat-card-title>{{ currentWeather.WeatherText }}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="assets/images/weather.jpg" alt="Weather Image">
+            <mat-card-content>
+                <p>
+                    {{ currentWeather.WeatherText }}.
+                </p>
+                <p>Temperature: {{ currentWeather.Temperature.Metric.Value }}°C</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="favorite-button" *ngIf="!isFavorite(currentCity)" (click)="markAsFavorite(currentCity)">
+                    Add to favorites
+                </button>
+                <button class="remove-button" *ngIf="isFavorite(currentCity)" (click)="removeFavoriteCity(currentCity)">
+                    Remove from favorites
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+        <div class='forecast-div' *ngIf="fiveDayForecast">
+            <mat-card *ngFor="let forecast of fiveDayForecast" class="example-card" [@fadeIn]>
+                <mat-card-header>
+                    <mat-card-title>{{forecast.Date | date: 'mediumDate'}}</mat-card-title>
+                    <mat-card-subtitle>Min Temp: {{forecast.MinTemperature}}°C</mat-card-subtitle>
+                    <mat-card-subtitle>Max Temp: {{forecast.MaxTemperature}}°C</mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Conditions during the day: {{forecast.DayIconPhrase}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Conditions during the night: {{forecast.NightIconPhrase}}
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
+    </ng-template>
+    <div class="error" *ngIf="errorMessage">
+        <p>{{errorMessage}}</p>
+    </div>

@@ -1,0 +1,17 @@
+<div *ngIf="favoriteCities.length > 0; else noFavorites">
+    <div class="city-card" *ngFor="let city of favoriteCities">
+        <h2 class="city-name">{{ city.name }}</h2>
+        <p>City ID: {{city.id}}</p>
+        <p class="weather-text">Weather: {{ city.currentWeather.WeatherText }}</p>
+        <p class="temperature-text">Temperature: {{ city.currentWeather.Temperature.Metric.Value }} {{
+            city.currentWeather.Temperature.Metric.Unit }}</p>
+        <button class="details-button" (click)="onCityClick(city)">Show Details</button>
+    </div>
+</div>
+
+<ng-template #noFavorites>
+    <div class="no-favorites">
+        <h2>No favorite cities to display.</h2>
+        <img src="assets/images/no-data.webp" alt="No Favorites">
+    </div>
+</ng-template>

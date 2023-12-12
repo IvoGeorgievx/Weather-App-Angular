@@ -1,0 +1,29 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+.light-theme {
+  --background: white;
+  --text-color: black;
+  --element-background: #f0f0f0;
+  --element-text-color: black;
+}
+
+.dark-theme {
+  --background: rgba(0, 0, 0, 0.781);
+
+  --element-background: #333;
+  --element-text-color: white;
+}
